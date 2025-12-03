@@ -34,8 +34,8 @@ func CountLinesInFile(path string) int {
 	return lines
 }
 
-func ParseSpaceSeparatedListOfInts(line string) []int64 {
-	items := strings.Split(line, " ")
+func ParseListOfInts(line string, sep string) []int64 {
+	items := strings.Split(line, sep)
 
 	ints := make([]int64, len(items))
 
@@ -48,4 +48,23 @@ func ParseSpaceSeparatedListOfInts(line string) []int64 {
 	}
 
 	return ints
+}
+
+func IntSliceToInt64(ints []int64) int64 {
+	var result int64 = 0
+	for pos, v := range ints {
+		result += v * powInt64(10, int64(len(ints)-pos-1))
+	}
+	return result
+}
+
+func powInt64(base, exp int64) int64 {
+	if exp == 0 {
+		return 1
+	}
+	result := base
+	for i := int64(1); i < exp; i++ {
+		result *= base
+	}
+	return result
 }
