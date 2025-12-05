@@ -68,3 +68,11 @@ func powInt64(base, exp int64) int64 {
 	}
 	return result
 }
+
+func StrToInt64(s string) int64 {
+	i, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		panic(err)
+	}
+	return i
+}
