@@ -37,14 +37,19 @@ func CountLinesInFile(path string) int {
 func ParseListOfInts(line string, sep string) []int64 {
 	items := strings.Split(line, sep)
 
-	ints := make([]int64, len(items))
+	ints := make([]int64, 0)
 
-	for i, item := range items {
+	i := 0
+	for _, item := range items {
+		if strings.TrimSpace(item) == "" {
+			continue
+		}
 		num, err := strconv.ParseInt(item, 10, 64)
 		if err != nil {
 			panic(err)
 		}
-		ints[i] = num
+		ints = append(ints, num)
+		i++
 	}
 
 	return ints
